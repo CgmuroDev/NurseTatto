@@ -1,0 +1,73 @@
+<section id="faq" class="py-24 bg-darker relative">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span class="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">FAQ</span>
+      <h2 class="text-4xl sm:text-5xl font-serif font-bold text-white mb-4">Preguntas Frecuentes</h2>
+      <p class="text-ashes/50">Todo lo que necesitás saber antes de tu primer tatuaje.</p>
+    </div>
+    
+    <div class="space-y-4" id="faq-container">
+      {[
+        {
+          q: '¿Duele hacerse un tatuaje?',
+          a: 'El dolor es relativo y depende de la zona del cuerpo. Áreas con más músculo (brazos, piernas) suelen ser más tolerables. Zonas con hueso cerca de la piel (costillas, tobillos) pueden ser más sensibles. Trabajo con técnicas para minimizar la incomodidad y hago pausas cuando las necesites.'
+        },
+        {
+          q: '¿Cuánto cuesta un tatuaje?',
+          a: 'El precio depende del tamaño, complejidad y tiempo de trabajo. Los diseños pequeños desde $800 MXN. Para piezas medianas y grandes, te doy cotización personalizada por WhatsApp con referencias y tamaño aproximado. El depósito para apartar cita es del 30%.'
+        },
+        {
+          q: '¿Cuánto tiempo tarda en sanar?',
+          a: 'La piel tarda entre 2-4 semanas en cicatrizar superficialmente. Los primeros 3-5 días es normal que haya enrojecimiento y costra. Te doy instrucciones de aftercare detalladas y estoy disponible por WhatsApp para cualquier duda durante tu recuperación.'
+        },
+        {
+          q: '¿Puedo traer mi propio diseño?',
+          a: '¡Claro! Me encanta trabajar con ideas de mis clientes. Traé referencias, bocetos o simplemente contame la historia detrás de tu tattoo. Yo adapto el diseño para que funcione perfectamente como tatuaje, considerando la anatomía y el envejecimiento de la pieza.'
+        },
+        {
+          q: '¿Usan materiales estériles?',
+          a: 'Absolutamente todo es de un solo uso: agujas, guantes, vasitos, etc. El espacio se desinfecta antes y después de cada sesión. Mi formación en enfermería me da una ventaja única en protocolos de bioseguridad e higiene.'
+        },
+        {
+          q: '¿Se puede borrar un tatuaje?',
+          a: 'Sí, ofrezco sesiones de eliminación con láser. Requiere entre 6-12 sesiones dependiendo del tamaño, colores y edad del tattoo. La consulta inicial es gratuita para evaluar tu caso.'
+        },
+      ].map((item, index) => (
+        <div class="faq-item border border-white/5 rounded-xl bg-gray-900/30 overflow-hidden">
+          <button 
+            class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+            data-index={index}
+          >
+            <span class="text-white font-semibold pr-4">{item.q}</span>
+            <svg class="faq-icon w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-ashes/60 leading-relaxed">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = !content.classList.contains('hidden');
+      
+      // Close all
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+      
+      // Open clicked if was closed
+      if (!isOpen) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+</script>

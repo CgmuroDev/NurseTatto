@@ -1,0 +1,65 @@
+<section id="portafolio" class="py-24 bg-darker relative">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span class="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">Portafolio</span>
+      <h2 class="text-4xl sm:text-5xl font-serif font-bold text-white mb-4">Trabajos Recientes</h2>
+      <p class="text-ashes/50 max-w-2xl mx-auto">Cada pieza es única. Sin copias. Sin plantillas. Solo arte original en tu piel.</p>
+    </div>
+    
+    <!-- Masonry Grid -->
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="gallery-grid">
+      <!-- JavaScript will load images from portafolio.json -->
+    </div>
+    
+    <div class="text-center mt-12">
+      <a 
+        href="https://wa.me/5213313960137?text=Hola%20Lajami,%20quiero%20ver%20más%20trabajos" 
+        target="_blank"
+        class="inline-flex items-center gap-2 text-accent hover:text-accent-light font-bold transition-colors"
+      >
+        Ver más en WhatsApp
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Load portfolio images from JSON
+  fetch('/portafolio.json')
+    .then(res => res.json())
+    .then(images => {
+      const grid = document.getElementById('gallery-grid');
+      images.forEach((img, index) => {
+        const div = document.createElement('div');
+        div.className = 'break-inside-avoid group relative overflow-hidden rounded-xl bg-gray-900 border border-white/5 hover:border-accent/30 transition-all duration-300';
+        
+        const aspectClass = img.size === 'large' ? 'aspect-[3/4]' : 'aspect-square';
+        
+        // Use placeholder if image doesn't exist
+        const fallbackSrc = `https://images.unsplash.com/photo-${['1568515045052-f9a854d70bfd','1611501275019-9b5cda994e8d','1590246815117-425459021337','1475403614135-5f1aa0eb5015','1598371839696-5c5bb00bdc28','1562962230-16e4623d36e6','1598371839696-5c5bb00bdc28','1562962230-16e4623d36e6'][index % 8]}?w=600&fit=crop`;
+        
+        div.innerHTML = `
+          <div class="${aspectClass} overflow-hidden">
+            <img 
+              src="${img.src}" 
+              alt="${img.title}"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              onerror="this.src='${fallbackSrc}'"
+            >
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-darker via-darker/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <p class="text-accent font-bold text-xs uppercase tracking-wider">${img.style}</p>
+            <h3 class="text-white font-bold text-lg">${img.title}</h3>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    })
+    .catch(err => console.error('Error loading portfolio:', err));
+</script>
