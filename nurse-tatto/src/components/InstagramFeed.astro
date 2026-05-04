@@ -1,3 +1,17 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const posts = [
+  { img: `${baseUrl}portafolio/1.jpg`, likes: '234' },
+  { img: `${baseUrl}portafolio/2.jpg`, likes: '189' },
+  { img: `${baseUrl}portafolio/3.jpg`, likes: '312' },
+  { img: `${baseUrl}portafolio/4.jpg`, likes: '156' },
+  { img: `${baseUrl}portafolio/5.jpg`, likes: '278' },
+];
+---
+
 <section id="instagram" class="py-24 bg-dark relative">
   <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent"></div>
   
@@ -10,13 +24,7 @@
     
     <!-- Instagram Grid -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-      {[
-        { img: '/portafolio/1.jpg', likes: '234' },
-        { img: '/portafolio/2.jpg', likes: '189' },
-        { img: '/portafolio/3.jpg', likes: '312' },
-        { img: '/portafolio/4.jpg', likes: '156' },
-        { img: '/portafolio/5.jpg', likes: '278' },
-      ].map(item => (
+      {posts.map(item => (
         <a 
           href="https://www.instagram.com/mistyaceves" 
           target="_blank" 

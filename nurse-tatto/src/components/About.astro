@@ -1,3 +1,9 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
 <section id="sobre-mi" class="py-24 bg-dark relative">
   <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
   
@@ -8,7 +14,7 @@
         <div class="absolute -inset-4 bg-gradient-to-br from-gold/10 to-gold/5 rounded-2xl blur-xl"></div>
         <div class="relative aspect-[3/4] bg-gradient-to-br from-gray-850 to-gray-900 rounded-2xl overflow-hidden border border-white/5">
           <img 
-            src="/artista.jpeg" 
+            src={`${baseUrl}artista.jpeg`} 
             alt="Lajami - Tatuadora profesional" 
             class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500"
           >

@@ -30,7 +30,11 @@
 
 <script>
   // Load portfolio images from JSON
-  fetch('/portafolio.json')
+  const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
+  fetch(`${baseUrl}portafolio.json`)
     .then(res => res.json())
     .then(images => {
       const grid = document.getElementById('gallery-grid');
@@ -46,7 +50,7 @@
         div.innerHTML = `
           <div class="${aspectClass} overflow-hidden">
             <img 
-              src="${img.src}" 
+              src="${baseUrl}${img.src}" 
               alt="${img.title}"
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               onerror="this.src='${fallbackSrc}'"
